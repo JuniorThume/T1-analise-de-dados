@@ -7,6 +7,11 @@ def interpolacao(y1, y2, x1, x2, xa):
   else:
     result = (((float(y2) - float(y1)) / (float(x2) - float(x1))) * (float(xa) - float(x1)) + float(y1))
     return round(result, 2)
+  
+def printArray(arr, eixo):
+  print(f'Eixo ${eixo}: \n')
+  for i in arr:
+    print(i)
 
 ab = pd.read_csv("./abalone.csv",header=None)
 ind = np.random.rand(4178) >= 0.9
@@ -23,7 +28,10 @@ for i in range(imax):
     y.append(ab.iloc[i,2])
 
 for k in range(len(y)-1):
-  print(y[k])
   if(k > 1 and y[k] == None):
     if((y[k-1] != None) and y[k+1] != None):
       y[k] = interpolacao(y[k-1], y[k+1], x[k-1], x[k+1], x[k])
+      print(y[k])
+
+printArray(y, 'y')
+# printArray(x, 'x')
